@@ -1,0 +1,11 @@
+FROM openjdk:11-jre-slim-buster
+FROM liquibase/liquibase:latest
+
+#Install Kerberos client
+RUN apt-get -y install krb5-user libpam-krb5 
+
+#RUN apt-get update \
+#    && apt-get -yqq install krb5-user libpam-krb5 \
+#    && apt-get -yqq install gnupg wget \
+#    && rm -rf /var/lib/apt/lists/*
+COPY --chown=liquibase:liquibase krb5.conf /etc/
